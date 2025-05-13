@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Відкрити Telegram</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      height: 100vh;
+      background: linear-gradient(135deg, #1a202c, #4a1d96, #5b21b6);
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .container {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    h2 {
+      font-size: 24px;
+      font-weight: 600;
+      animation: pulse 2s infinite;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 18px;
+      font-weight: 400;
+      margin-bottom: 20px;
+    }
+
+    .btn, .fingerprint {
+      background: linear-gradient(45deg, #6b46c1, #9f7aea);
+      color: white;
+      padding: 14px 28px;
+      border-radius: 25px;
+      border: none;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .fingerprint {
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
+    .fingerprint img {
+      max-width: 150px;
+      height: auto;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="androidBlock">
+    <h2>🔞 Відкриваємо Telegram...</h2>
+    <p>Натисни на кнопку нижче, щоб перейти в Telegram</p>
+    <button class="btn" onclick="openTelegramAndroid()">Натисни для переходу</button>
+  </div>
+
+  <div class="container" id="iosBlock">
+    <h2>УТРИМУЙТЕ ПАЛЕЦЬ НА ВІДБИТКУ ⬇️⬇️!</h2>
+    <p>ВИБЕРІТЬ <strong>"ВІДКРИТИ ПОСИЛАННЯ"</strong></p>
+    <button class="fingerprint" id="iosTouchBtn">
+      <img src="https://so65a.github.io/2/1.png" alt="Відбиток пальця" />
+    </button>
+  </div>
+
+  <script>
+    const tgLink = "https://t.me/+VINUhMe4kmJmZjdi";
+    const finalUrl = "https://prev.affomelody.com/f6bUZz";
+
+    const isAndroid = /android/i.test(navigator.userAgent);
+    const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+    const isTikTok = /ttwebview|musically|tiktok|bytedance|douyin|webview/i.test(navigator.userAgent.toLowerCase());
+
+    const androidBlock = document.getElementById("androidBlock");
+    const iosBlock = document.getElementById("iosBlock");
+
+    function openTelegramAndroid() {
+      const intent = `intent://${tgLink.replace(/^https?:\/\//, '')}#Intent;package=org.telegram.messenger;scheme=https;end`;
+      window.location.href = intent;
+
+      setTimeout(() => {
+        window.location.href = finalUrl;
+      }, 4000);
+    }
+
+    function openTelegramIOS() {
+      window.location.href = tgLink;
+      setTimeout(() => {
+        window.location.href = finalUrl;
+      }, 4000);
+    }
+
+    window.onload = function () {
+      if (isAndroid) {
+        androidBlock.style.display = "flex";
+        if (!isTikTok) {
+          openTelegramAndroid();
+        }
+      } else if (isIOS) {
+        iosBlock.style.display = "flex";
+        if (!isTikTok) {
+          openTelegramIOS();
+        } else {
+          document.getElementById("iosTouchBtn").addEventListener("touchstart", function () {
+            openTelegramIOS();
+          });
+        }
+      } else {
+        // Default fallback for unknown platforms
+        window.location.href = finalUrl;
+      }
+    };
+  </script>
+</body>
+</html>
