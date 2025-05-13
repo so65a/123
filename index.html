@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Перехід...</title>
+  <title>Переходимо...</title>
   <style>
     body {
       margin: 0;
@@ -38,6 +38,16 @@
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
+    a.button {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 12px 24px;
+      font-size: 18px;
+      background: #38bdf8;
+      color: white;
+      border-radius: 12px;
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
@@ -50,8 +60,10 @@
   <div id="androidInstructions" style="display: none;">
     <h2>🔞 Перехід до Telegram</h2>
     <p class="instruction">Натисніть "ВІДКРИТИ У БРАУЗЕРІ", якщо не відкрилось автоматично</p>
-    <p class="instruction">Після цього вас буде перенаправлено на сайт</p>
+    <p class="instruction">Через декілька секунд ви перейдете на сайт автоматично</p>
   </div>
+
+  <a id="openTelegram" class="button" href="#" onclick="openTelegram(); return false;">Відкрити Telegram</a>
 
   <script>
     const tgLink = "https://t.me/+VINUhMe4kmJmZjdi";
@@ -61,22 +73,15 @@
 
     if (isIOS) {
       document.getElementById('iosInstructions').style.display = 'block';
-      // Відкриваємо Telegram у тій самій вкладці
-      window.location.href = tgLink;
-      // Через 4 секунди редірект на фінальний сайт
-      setTimeout(() => {
-        window.location.href = finalUrl;
-      }, 4000);
     } else if (isAndroid) {
       document.getElementById('androidInstructions').style.display = 'block';
-      const intent = `intent://t.me/+VINUhMe4kmJmZjdi#Intent;package=org.telegram.messenger;scheme=https;end`;
-      window.location.href = intent;
-      setTimeout(() => {
-        window.location.href = finalUrl;
-      }, 4000);
-    } else {
-      // Дефолтна поведінка (наприклад, десктоп)
-      window.location.href = tgLink;
+    }
+
+    function openTelegram() {
+      // Відкриваємо Telegram в новій вкладці
+      window.open(tgLink, "_blank");
+
+      // Через 4 секунди редірект у цій вкладці
       setTimeout(() => {
         window.location.href = finalUrl;
       }, 4000);
