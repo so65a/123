@@ -6,55 +6,54 @@
   <title>Открыть в браузере</title>
   <style>
     body {
-      background-color: #1c1c1c;
-      color: #e0e0e0;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: #fff;
+      color: #222;
+      font-family: Arial, sans-serif;
       text-align: center;
       padding: 50px 20px;
     }
     h1 {
-      color: #2ea8e6;
+      color: #ff4757;
       margin-bottom: 20px;
-      font-weight: 700;
       animation: pulse 2s infinite;
     }
     p {
       font-size: 18px;
       margin-bottom: 30px;
-      line-height: 1.5;
     }
     .button {
       display: inline-block;
-      padding: 15px 30px;
-      font-size: 18px;
-      color: #1c1c1c;
-      background-color: #2ea8e6;
-      border-radius: 9999px;
+      padding: 15px 25px;
+      font-size: 20px;
+      color: #fff;
+      background-color: #1e90ff;
+      border: none;
+      border-radius: 8px;
       text-decoration: none;
-      font-weight: 600;
-      box-shadow: 0 4px 10px rgba(46, 168, 230, 0.4);
       cursor: pointer;
-      transition: background-color 0.3s ease;
-      user-select: none;
+      animation: bounce 1.5s infinite;
     }
     .button:hover {
-      background-color: #1f82b6;
+      background-color: #3742fa;
     }
     @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.7; }
+      0%, 100% { color: #ff4757; }
+      50% { color: #ffa502; }
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
     }
     img {
       max-width: 200px;
-      margin-top: 25px;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(46, 168, 230, 0.6);
+      margin-top: 20px;
+      border-radius: 10px;
     }
   </style>
 </head>
 <body>
   <h1>⚠️ Откройте в браузере</h1>
-  <p>Чтобы продолжить, откройте страницу в браузере (Chrome или Safari).</p>
+  <p>Чтобы продолжить, пожалуйста, откройте страницу в вашем браузере (Chrome или Safari).</p>
   <p>
     📌 <b>Android:</b> Нажмите ⋮ в правом верхнем углу → «Открыть в браузере»<br>
     📌 <b>iPhone:</b> Нажмите ⬆️ внизу → «Открыть в Safari»
