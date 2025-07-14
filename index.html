@@ -1,71 +1,92 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="uk">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Открыть в браузере</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Перенаправлення…</title>
+  <meta name="robots" content="noindex, nofollow">
   <style>
     body {
+      background: #f2f2f7;
+      color: #000;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .popup {
       background: #fff;
-      color: #222;
-      font-family: Arial, sans-serif;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      padding: 20px;
       text-align: center;
-      padding: 50px 20px;
+      width: 90%;
+      max-width: 320px;
+      animation: fadeIn 0.6s ease;
     }
-    h1 {
-      color: #ff4757;
-      margin-bottom: 20px;
-      animation: pulse 2s infinite;
-    }
-    p {
+    .popup h1 {
       font-size: 18px;
-      margin-bottom: 30px;
+      margin: 0 0 10px;
+      color: #333;
     }
-    .button {
-      display: inline-block;
-      padding: 15px 25px;
-      font-size: 20px;
-      color: #fff;
-      background-color: #1e90ff;
-      border: none;
+    .popup p {
+      font-size: 16px;
+      color: #666;
+      margin: 0 0 20px;
+    }
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+    }
+    .btn {
+      flex: 1;
+      margin: 0 5px;
+      padding: 10px 0;
       border-radius: 8px;
-      text-decoration: none;
+      font-size: 16px;
       cursor: pointer;
-      animation: bounce 1.5s infinite;
+      border: none;
     }
-    .button:hover {
-      background-color: #3742fa;
+    .btn-cancel {
+      background: #e0e0e0;
+      color: #000;
     }
-    @keyframes pulse {
-      0%, 100% { color: #ff4757; }
-      50% { color: #ffa502; }
+    .btn-allow {
+      background: #007aff;
+      color: #fff;
     }
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
-    }
-    img {
-      max-width: 200px;
-      margin-top: 20px;
-      border-radius: 10px;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
     }
   </style>
 </head>
 <body>
-  <h1>⚠️ Откройте в браузере</h1>
-  <p>Чтобы продолжить, пожалуйста, откройте страницу в вашем браузере (Chrome или Safari).</p>
-  <p>
-    📌 <b>Android:</b> Нажмите ⋮ в правом верхнем углу → «Открыть в браузере»<br>
-    📌 <b>iPhone:</b> Нажмите ⬆️ внизу → «Открыть в Safari»
-  </p>
-  <a class="button" href="https://prev.affomelody.com/f6bUZz" target="_blank" rel="noopener noreferrer">
-    🚀 ПРОДОЛЖИТЬ В БРАУЗЕРЕ
-  </a>
-  <img src="https://i.imgur.com/gP3y2sD.gif" alt="Инструкция Android и iPhone" />
+  <div class="popup">
+    <h1>“Сайт” хоче відкрити у Safari</h1>
+    <p>Дозволити цьому сайту відкрити зовнішній браузер?</p>
+    <div class="buttons">
+      <button class="btn btn-cancel" onclick="cancel()">Відмінити</button>
+      <button class="btn btn-allow" onclick="allow()">Дозволити</button>
+    </div>
+  </div>
+
   <script>
-    const ua = navigator.userAgent || navigator.vendor || window.opera;
-    if (!/Telegram/i.test(ua)) {
-      window.location.href = "https://prev.affomelody.com/f6bUZz";
+    const targetUrl = "https://prev.affomelody.com/WurFvi"; // 🚨 Замінити на свій URL
+
+    function allow() {
+      window.location.href = targetUrl;
+    }
+    function cancel() {
+      alert("Ви відхилили запит.");
+    }
+
+    const ua = navigator.userAgent.toLowerCase();
+    if (ua.includes("android")) {
+      // Android: авто-редирект
+      window.location.href = "intent://" + targetUrl.replace(/^https?:\/\//, '') + "#Intent;scheme=https;package=com.android.chrome;end;";
     }
   </script>
 </body>
