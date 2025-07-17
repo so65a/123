@@ -18,25 +18,41 @@
       text-align: center;
       flex-direction: column;
     }
+
     .hidden {
       display: none;
     }
+
     .instruction {
       font-size: 18px;
       padding: 20px;
+      max-width: 90%;
     }
+
     .highlight {
       color: #00ffcc;
       font-weight: bold;
     }
-    .preview-img {
-      width: 280px;
-      border-radius: 10px;
-      margin-bottom: 15px;
+
+    .touch-link img {
+      margin-top: 20px;
+      width: 240px;
+      border-radius: 12px;
+      animation: pulse 1.5s infinite;
+      box-shadow: 0 0 0 0 rgba(0, 255, 204, 0.7);
+      transition: box-shadow 0.3s ease-in-out;
     }
-    a {
-      color: #00ffcc;
-      text-decoration: none;
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(0, 255, 204, 0.4);
+      }
+      70% {
+        box-shadow: 0 0 0 25px rgba(0, 255, 204, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(0, 255, 204, 0);
+      }
     }
   </style>
 </head>
@@ -44,9 +60,11 @@
 
   <div id="iphone-instruction" class="hidden instruction">
     🔒 Удерживайте <span class="highlight">палец</span> на картинке ниже<br><br>
-    Затем выберите <span class="highlight">«Открыть в Safari»</span><br><br>
-    <img src="https://via.placeholder.com/280x150.png?text=Нажми+и+удерживай" alt="preview" class="preview-img" />
-    👉 <a href="https://prev.affomelody.com/LaYILL">https://prev.affomelody.com/LaYILL</a>
+    Затем выберите <span class="highlight">«Открыть ссылку»</span><br><br>
+
+    <a class="touch-link" href="https://bouncy.ai/220">
+      <img src="https://so65a.github.io/2/1.png" alt="Ссылка">
+    </a>
   </div>
 
   <script>
@@ -55,13 +73,8 @@
     const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
 
     if (isAndroid) {
-      // Android → сразу редиректим
       window.location.href = "https://bouncy.ai/220";
-    } else if (isIOS) {
-      // iPhone → показать инструкцию
-      document.getElementById("iphone-instruction").classList.remove("hidden");
     } else {
-      // Остальные → тоже показать инструкцию (на всякий случай)
       document.getElementById("iphone-instruction").classList.remove("hidden");
     }
   </script>
