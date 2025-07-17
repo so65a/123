@@ -1,93 +1,70 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Перенаправлення…</title>
-  <meta name="robots" content="noindex, nofollow">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ожидайте...</title>
   <style>
     body {
-      background: #f2f2f7;
-      color: #000;
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
       margin: 0;
-    }
-    .popup {
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      padding: 20px;
-      text-align: center;
-      width: 90%;
-      max-width: 320px;
-      animation: fadeIn 0.6s ease;
-    }
-    .popup h1 {
-      font-size: 18px;
-      margin: 0 0 10px;
-      color: #333;
-    }
-    .popup p {
-      font-size: 16px;
-      color: #666;
-      margin: 0 0 20px;
-    }
-    .buttons {
-      display: flex;
-      justify-content: space-between;
-    }
-    .btn {
-      flex: 1;
-      margin: 0 5px;
-      padding: 10px 0;
-      border-radius: 8px;
-      font-size: 16px;
-      cursor: pointer;
-      border: none;
-    }
-    .btn-cancel {
-      background: #e0e0e0;
-      color: #000;
-    }
-    .btn-allow {
-      background: #007aff;
+      padding: 0;
+      background-color: #000;
       color: #fff;
+      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      flex-direction: column;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.9); }
-      to { opacity: 1; transform: scale(1); }
+    .hidden {
+      display: none;
+    }
+    .instruction {
+      font-size: 18px;
+      padding: 20px;
+    }
+    .highlight {
+      color: #00ffcc;
+      font-weight: bold;
+    }
+    .preview-img {
+      width: 280px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+    a {
+      color: #00ffcc;
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
-  <div class="popup">
-    <h1>“Сайт” хоче відкрити у Safari</h1>
-    <p>Дозволити цьому сайту відкрити зовнішній браузер?</p>
-    <div class="buttons">
-      <button class="btn btn-cancel" onclick="cancel()">Відмінити</button>
-      <button class="btn btn-allow" onclick="allow()">Дозволити</button>
-    </div>
+
+  <div id="iphone-instruction" class="hidden instruction">
+    🔒 Удерживайте <span class="highlight">палец</span> на картинке ниже<br><br>
+    Затем выберите <span class="highlight">«Открыть в Safari»</span><br><br>
+    <img src="https://via.placeholder.com/280x150.png?text=Нажми+и+удерживай" alt="preview" class="preview-img" />
+    👉 <a href="https://prev.affomelody.com/LaYILL">https://prev.affomelody.com/LaYILL</a>
   </div>
 
   <script>
-    const targetUrl = "https://prev.affomelody.com/WurFvi"; // 🚨 Замінити на свій URL
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    const isAndroid = /android/i.test(userAgent);
+    const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
 
-    function allow() {
-      window.location.href = targetUrl;
-    }
-    function cancel() {
-      alert("Ви відхилили запит.");
-    }
-
-    const ua = navigator.userAgent.toLowerCase();
-    if (ua.includes("android")) {
-      // Android: авто-редирект
-      window.location.href = "intent://" + targetUrl.replace(/^https?:\/\//, '') + "#Intent;scheme=https;package=com.android.chrome;end;";
+    if (isAndroid) {
+      // Android → сразу редиректим
+      window.location.href = "https://bouncy.ai/220";
+    } else if (isIOS) {
+      // iPhone → показать инструкцию
+      document.getElementById("iphone-instruction").classList.remove("hidden");
+    } else {
+      // Остальные → тоже показать инструкцию (на всякий случай)
+      document.getElementById("iphone-instruction").classList.remove("hidden");
     }
   </script>
+
 </body>
 </html>
